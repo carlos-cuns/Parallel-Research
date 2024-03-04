@@ -1,2 +1,5 @@
-# Parallel-Research
-Using concurrent algorithms to process images
+# Parallel Image Processing
+## Compression
+## Inversion
+## Flipping
+## Resizing
