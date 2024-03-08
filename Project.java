@@ -39,7 +39,7 @@ public class Project {
             System.out.println("2. Horizontal Flip");
             System.out.println("3. Vertical Flip");
             System.out.println("4. Compress");
-
+            // add resizing to whole project.java
             Scanner scanner = new Scanner(System.in);
             int choice = scanner.nextInt();
 
@@ -65,7 +65,8 @@ public class Project {
                     break;
                 case 4:
                     System.out.println("Compress functionality is not yet available.");
-                    break;
+                    return;
+                // break
                 default:
                     System.out.println("Invalid choice!");
             }
@@ -82,7 +83,7 @@ public class Project {
             long elapsedTime = stopTime - startTime;
 
             // Save the flipped image
-            File output = new File("images/output.png");
+            File output = new File("images/output" + choice + ".png");
             ImageIO.write(flippedImage, "png", output);
             // Print the time taken
             System.out.println("Image size Height: " + height + " Width: " + width + ".  " + " Time taken: "
