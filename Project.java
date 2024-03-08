@@ -37,8 +37,7 @@ class project {
       System.out.println("1. Inverse Transformation");
       System.out.println("2. Horizontal Flip");
       System.out.println("3. Vertical Flip");
-      System.out.println("4. Resize");
-      System.out.println("5. Compress");
+      System.out.println("4. Compress");
 
       Scanner scanner = new Scanner(System.in);
       int choice = scanner.nextInt();
@@ -76,14 +75,10 @@ class project {
           break;
         case 4:
           // Resize
-          System.out.println("Resize functionality is not yet available.");
+          System.out.println("Compress functionality is not yet available.");
 
           break;
-        case 5:
-          // Compress
-          System.out.println("Compression functionality is not yet available.");
-
-          break;
+        
         default:
           System.out.println("Invalid choice!");
       }
