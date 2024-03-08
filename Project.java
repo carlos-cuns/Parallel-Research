@@ -7,11 +7,12 @@ import javax.imageio.ImageIO;
 //Import the package names here: Compression, Inversion, Flipping etc. 
 import ImageFlip.ImageFlipTask;
 
-
-
 public class Project {
     public static void main(String[] args) throws IOException, InterruptedException {
         try {
+
+            // Start the timer
+            long startTime = System.currentTimeMillis();
             // Load the original image
             BufferedImage originalImage = ImageIO.read(new File("images/input.png"));
 
@@ -40,8 +41,7 @@ public class Project {
 
             Scanner scanner = new Scanner(System.in);
             int choice = scanner.nextInt();
-          
-            //Start the timer here
+
             // Depending on the user's choice, execute the corresponding image processing operation in a separate thread
             switch (choice) {
                 case 1:
@@ -68,11 +68,20 @@ public class Project {
             for (Thread thread : threads) {
                 thread.join();
             }
-           //Stop the timer here ..
+
+            // Stop the timer
+          long stopTime = System.currentTimeMillis();
+
+          // Calculate elapsed time
+          long elapsedTime = stopTime - startTime;
 
             // Save the flipped image
             File output = new File("images/output.png");
             ImageIO.write(flippedImage, "png", output);
+            // Print the time taken
+            System.out.println("Image size Height: "+height+" Width: "+width+".  "+" Time taken: " + elapsedTime + " milliseconds.");
+    
+
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
