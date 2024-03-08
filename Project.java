@@ -39,6 +39,7 @@ public class Project {
             System.out.println("2. Horizontal Flip");
             System.out.println("3. Vertical Flip");
             System.out.println("4. Compress");
+            System.out.println("5. Resize");
             // add resizing to whole project.java
             Scanner scanner = new Scanner(System.in);
             int choice = scanner.nextInt();
@@ -47,6 +48,7 @@ public class Project {
             // operation in a separate thread
             switch (choice) {
                 case 1:
+                    //Inversion
                     executeInvert(originalImage, flippedImage, threads, numThreads, segmentHeight, remainingHeight,
                             startIndex);
                     System.out.println("Image inverted successfully.");
@@ -64,9 +66,14 @@ public class Project {
                     System.out.println("Image flipped vertically successfully.");
                     break;
                 case 4:
+                    //Compress
                     System.out.println("Compress functionality is not yet available.");
-                    return;
-                // break
+                    break;
+                case 5:
+                    //Resize
+                    System.out.println("Resize functionality is not yet available.");
+                    break;
+                    
                 default:
                     System.out.println("Invalid choice!");
             }
