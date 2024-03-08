@@ -5,7 +5,7 @@ This project code utilizes parallel image processing to to process for image man
 
 # How it works:
 
-* **Multiple Workers**: The code divides the image into smaller sections. Each section is then assigned to a separate "worker" (thread) for processing. These workers are instances of the ```ImageFlipTask``` class.
+* **Multiple Workers**: The code divides the image into smaller sections. Each section is then assigned to a separate "worker" (thread) for processing. These workers are instances of the ```ImageFlipTask```, ```ImageInversionTask```, ```ImageResizeTask``` classes.
 
     ```java
     // Create and start threads for flipping
