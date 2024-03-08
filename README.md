@@ -17,7 +17,7 @@ This project code utilizes parallel image processing to to process for image man
     }
 
     ```
-* **Simultaneous Processing**: Each worker flips its assigned section of the image independently and concurrently. This allows for faster processing compared to a single thread handling the entire image. This means that each of the classes run different image processing algorithms and each algorithm supports multi-processing via the spawned threads.
+* **Simultaneous Processing**: Each worker flips its assigned section of the image independently and concurrently. This allows for faster processing compared to a single thread handling the entire image. This means that each of the classes run a different image processing algorithm( Compression, Inversion, Flipp, Resize) and each algorithm supports multi-processing via the spawned threads.
 
 
     ```java
