@@ -1,5 +1,5 @@
 # Parallel Image Processing
-This project code utilizes parallel image processing to to process for image manipulation. This technique involves  slitting an image into multiple parts then the parts are processed simultaneously by different computing units, typically using multiple threads or processes. This allows for faster image processing, especially on multi-core processors, as the workload is divided among the available computing resources. This approach helps improve the speed of image processing, particularly for large images, by leveraging the capabilities of multi-core processors and distributing the workload efficiently among available computing resources.
+This project code utilizes parallel image processing to to process for image manipulation. This technique involves  slitting an image into multiple parts then the parts are processed simultaneously by different computing units, typically using multiple threads or processes. This allows for faster image processing, especially on multi-core processors, as the workload is divided among the available computing resources. This approach helps improve the speed of image processing, particularly for large images, by leveraging the capabilities of multi-core processors and distributing the workload efficiently among available processing cores with limitation to the specified number of threads.
 
 
 
