@@ -174,5 +174,5 @@ Download Code:
 
         ```
         Image flipped vertically successfully.
-
+        Image size Height: 753 Width: 1180.   Time taken: 2129 milliseconds.
         ```
