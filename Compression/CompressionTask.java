@@ -26,7 +26,8 @@ public class CompressionTask implements Runnable {
     }
 
     public void run() {
-        BufferedImage splitImage = originalImage.getSubimage(0, startIndex, originalImage.getWidth(), endIndex);
+        // going out of bounds, commented out for now
+        //BufferedImage splitImage = originalImage.getSubimage(0, startIndex, originalImage.getWidth(), endIndex);
         ByteArrayOutputStream compressed = new ByteArrayOutputStream();
 
         try (ImageOutputStream outputStream = ImageIO.createImageOutputStream(compressed)) {
@@ -41,7 +42,7 @@ public class CompressionTask implements Runnable {
             jpgWriter.setOutput(outputStream);
 
             // writing image as JPEG using in-memory stream
-            jpgWriter.write(null, new IIOImage(splitImage, null, null), jpgWriteParam);
+            jpgWriter.write(null, new IIOImage(originalImage, null, null), jpgWriteParam);
 
             jpgWriter.dispose();
 
@@ -50,6 +51,8 @@ public class CompressionTask implements Runnable {
 
             // Create a new BufferedImage from the compressed data
             compressedImage = ImageIO.read(new ByteArrayInputStream(jpegData));
+
+            //ImageIO.write(compressedImage, "jpg", new File("output.jpg"));
 
         } catch (IOException e) {
             e.printStackTrace();

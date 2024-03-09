@@ -7,6 +7,7 @@ import javax.imageio.ImageIO;
 //Import the package names here: Compression, Inversion, Flipping etc. 
 import ImageFlip.ImageFlipTask;
 import Inversion.InversionTask;
+import Compression.CompressionTask;
 
 public class Project {
     public static void main(String[] args) throws IOException, InterruptedException {
@@ -64,8 +65,10 @@ public class Project {
                     System.out.println("Image flipped vertically successfully.");
                     break;
                 case 4:
-                    System.out.println("Compress functionality is not yet available.");
-                    return;
+                    originalImage = ImageIO.read(new File("images/input.jpg"));
+                    executeCompression(originalImage, flippedImage, threads, numThreads, segmentHeight, remainingHeight, startIndex);
+                    System.out.println("Image compressed successfully.");
+                    break;
                 // break
                 default:
                     System.out.println("Invalid choice!");
@@ -83,8 +86,11 @@ public class Project {
             long elapsedTime = stopTime - startTime;
 
             // Save the flipped image
-            File output = new File("images/output" + choice + ".png");
-            ImageIO.write(flippedImage, "png", output);
+            //File output = new File("images/output" + choice + ".png");
+            File output = new File("images/output" + choice + ((choice==4)?".jpg":".png"));
+            //ImageIO.write(flippedImage, "png", output);
+            ImageIO.write(flippedImage, ((choice == 4)?"jpg":"png"), output);
+
             // Print the time taken
             System.out.println("Image size Height: " + height + " Width: " + width + ".  " + " Time taken: "
                     + elapsedTime + " milliseconds.");
@@ -118,6 +124,21 @@ public class Project {
             int segmentEndIndex = startIndex + segmentHeight + (i == numThreads - 1 ? remainingHeight : 0);
             threads[i] = new Thread(
                     new ImageFlipTask(originalImage, flippedImage, startIndex, segmentEndIndex, flipDirection));
+            threads[i].start();
+            startIndex = segmentEndIndex;
+        }
+    }
+
+    // Function to execute image Compression operation
+    private static void executeCompression(BufferedImage originalImage, BufferedImage compressedImage, Thread[] threads,
+            int numThreads,
+            int segmentHeight, int remainingHeight, int startIndex) {
+        // Create and start threads for flipping
+        for (int i = 0; i < numThreads; i++) {
+            int segmentEndIndex = startIndex + segmentHeight + (i == numThreads - 1 ? remainingHeight : 0);
+            threads[i] = new Thread(
+                    new CompressionTask(originalImage, compressedImage, startIndex, segmentEndIndex));
+            
             threads[i].start();
             startIndex = segmentEndIndex;
         }
