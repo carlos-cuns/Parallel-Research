@@ -7,7 +7,7 @@ import javax.imageio.ImageIO;
 //Import the package names here: Compression, Inversion, Flipping etc. 
 import ImageFlip.ImageFlipTask;
 import Inversion.InversionTask;
-import Compression.CompressionTask;
+import Grayscale.GrayscaleTask;
 
 public class Project {
     public static void main(String[] args) throws IOException, InterruptedException {
@@ -39,7 +39,7 @@ public class Project {
             System.out.println("1. Inverse Transformation");
             System.out.println("2. Horizontal Flip");
             System.out.println("3. Vertical Flip");
-            System.out.println("4. Compress");
+            System.out.println("4. Grayscale");
             System.out.println("5. Resize");
             // add resizing to whole project.java
             Scanner scanner = new Scanner(System.in);
@@ -67,9 +67,8 @@ public class Project {
                     System.out.println("Image flipped vertically successfully.");
                     break;
                 case 4:
-                    originalImage = ImageIO.read(new File("images/input.jpg"));
-                    executeCompression(originalImage, flippedImage, threads, numThreads, segmentHeight, remainingHeight, startIndex);
-                    System.out.println("Image compressed successfully.");
+                    executeGrayscale(originalImage, flippedImage, threads, numThreads, segmentHeight, remainingHeight, startIndex);
+                    System.out.println("Image grayscaled successfully.");
                     break;
                 // break
                 case 5:
@@ -93,10 +92,10 @@ public class Project {
             long elapsedTime = stopTime - startTime;
 
             // Save the flipped image
-            //File output = new File("images/output" + choice + ".png");
-            File output = new File("images/output" + choice + ((choice==4)?".jpg":".png"));
-            //ImageIO.write(flippedImage, "png", output);
-            ImageIO.write(flippedImage, ((choice == 4)?"jpg":"png"), output);
+            File output = new File("images/output" + choice + ".png");
+            //File output = new File("images/output" + choice + ((choice==4)?".jpg":".png"));
+            ImageIO.write(flippedImage, "png", output);
+            //ImageIO.write(flippedImage, ((choice == 4)?"jpg":"png"), output);
 
             // Print the time taken
             System.out.println("Image size Height: " + height + " Width: " + width + ".  " + " Time taken: "
@@ -137,15 +136,29 @@ public class Project {
     }
 
     // Function to execute image Compression operation
-    private static void executeCompression(BufferedImage originalImage, BufferedImage compressedImage, Thread[] threads,
+    // private static void executeCompression(BufferedImage originalImage, BufferedImage compressedImage, Thread[] threads,
+    //         int numThreads,
+    //         int segmentHeight, int remainingHeight, int startIndex) {
+    //     // Create and start threads for flipping
+    //     for (int i = 0; i < numThreads; i++) {
+    //         int segmentEndIndex = startIndex + segmentHeight + (i == numThreads - 1 ? remainingHeight : 0);
+    //         threads[i] = new Thread(
+    //                 new CompressionTask(originalImage, compressedImage, startIndex, segmentEndIndex));
+            
+    //         threads[i].start();
+    //         startIndex = segmentEndIndex;
+    //     }
+    // }
+
+    // Function to execute image grayscaling operation
+    private static void executeGrayscale(BufferedImage originalImage, BufferedImage flippedImage, Thread[] threads,
             int numThreads,
             int segmentHeight, int remainingHeight, int startIndex) {
         // Create and start threads for flipping
         for (int i = 0; i < numThreads; i++) {
             int segmentEndIndex = startIndex + segmentHeight + (i == numThreads - 1 ? remainingHeight : 0);
             threads[i] = new Thread(
-                    new CompressionTask(originalImage, compressedImage, startIndex, segmentEndIndex));
-            
+                    new GrayscaleTask(originalImage, flippedImage, startIndex, segmentEndIndex));
             threads[i].start();
             startIndex = segmentEndIndex;
         }
