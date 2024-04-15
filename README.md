@@ -162,6 +162,48 @@ Image size Height: 753 Width: 1180.   Time taken: 2129 milliseconds.
 
 ## Resizing
 
+Image resizing changes the dimensions of an image from its original dimensions. 
+Here's how it works:
+
+
+1. **Loading the Image**: The original image is loaded into a BufferedImage object named originalImage from the ```main``` function.
+2. **Creating the Resized Image**: Another BufferedImage object named resizedImage is created with the same dimensions as the original image to store the resized version.
+3. **Setting Up Resizing Task**: Information about the resizing process is stored in an ResizingTask object. This includes:
+* **originalImage**: Reference to the original image.
+* **resizedImage**: Reference to the resized image.
+* **newWidth and newHeight**: Define the new width and new height of the resized image.
+* **Output**: After all sections are processed by separate tasks, the resizedImage object holds the final resized version of the original image.
+
+The algorithm creates a new BufferedImage variable set to the new dimensions specified. A Graphics2D
+object is then made from that resized image and rendering hints are used to improved the RGB quality of
+the image. The original image is then drawn onto the resized image and the Graphic2D object is disposed.
+
+### Proof of Correctness:
+
+Being a visual project, verification of correctness can be firstly identified through visual examination of the original and output images. Does the output mirror the input in any way? this concept ensures the algorithm does what it's supposed to. In this case, resizing the image correctly. The algorithm takes the new specified dimensions, creates a copy of the original image, and applies the new dimensions to that copy.
+
+Here's an image of input:
+
+![Drag Racing](images/input.png)
+
+
+Here's an image of the output:
+
+![Drag Racing](images/output5.png)
+
+### Accuracy:
+
+Accuracy refers to how close the output (resized image) is to the intended result. By resizing each pixel according to the specified width and height, the algorithm maintains the integrity of the image without altering its contents and the algo's accuracy can be verified by examining the resized image produced by the algorithm and ensuring it matches the expected results. This algorithm resizes an image with 100% accuracy since no leaks or bad output was experienced during runtime.
+
+### Efficiency
+
+Efficiency refers to how quickly and with what resource usage the algorithm performs the task. This code achieves some level of efficiency by process parallelization, resource management and correctness of the output achieved. Efficiency can be evaluated by measuring the execution time and memory usage of the algorithm for varying image sizes and resizing accuracy, which were all satisfied by testing different-sized images and different numbers of threads, as shown below.
+
+```
+Image resized successfully.
+Image size Height: 721 Width: 736.   Time taken: 3605 milliseconds.
+```
+
 # Instructions to Run/Compile the Code:
 
 
@@ -204,6 +246,7 @@ Download Code:
         2. Horizontal Flip
         3. Vertical Flip
         4. Compress
+        5. Resize
         ```
 
 

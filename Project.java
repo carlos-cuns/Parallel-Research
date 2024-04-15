@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 import ImageFlip.ImageFlipTask;
 import Inversion.InversionTask;
 import Grayscale.GrayscaleTask;
+import Resizing.ResizingTask;
 
 public class Project {
     public static void main(String[] args) throws IOException, InterruptedException {
@@ -28,6 +29,9 @@ public class Project {
 
             // Create a new image for the flipped result
             BufferedImage flippedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+
+            // Create a new image for the resized result
+            //BufferedImage resizedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 
             // Divide the image into equal parts for each thread
             int segmentHeight = height / numThreads;
@@ -73,8 +77,9 @@ public class Project {
                 // break
                 case 5:
                     //Resize
-                    System.out.println("Resize functionality is not yet available.");
-                    return;
+                    executeResize(originalImage, threads, numThreads, 300, 150);
+                    System.out.println("Image resized successfully.");
+                    break;
                     //break;
                 default:
                     System.out.println("Invalid choice!");
@@ -165,4 +170,14 @@ public class Project {
     }
 
     // Function to execute image Resize operation
+    private static void executeResize(BufferedImage originalImage, Thread[] threads,
+            int numThreads, int width, int height) {
+        // Create and start threads for resizing
+        for (int i = 0; i < numThreads; i++) {
+            threads[i] = new Thread(
+                    new ResizingTask(originalImage, width, height));
+            threads[i].start();
+        }
+    }
+
 }

@@ -1,3 +1,5 @@
+package Resizing;
+
 // included libraries
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -10,7 +12,7 @@ public class ImageResizer {
 
     public static void main(String[] args) {
         String inputFile = "images/input.png"; 
-        String outputFile = "images/output2.png";
+        String outputFile = "images/output5.png";
         int newWidth = 200; // desired width
         int newHeight = 150; // desired height
 
